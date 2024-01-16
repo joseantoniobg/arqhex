@@ -1,6 +1,9 @@
 package application
 
-import "errors"
+import (
+	"errors"
+	uuid "github.com/satori/go.uuid"
+)
 
 type ProductInterface interface {
 	IsValid() (bool, error)
@@ -22,6 +25,14 @@ type Product struct {
 	Name   string
 	Status string
 	Price  float64
+}
+
+func NewProduct() *Product {
+	product := Product{
+		ID:     uuid.NewV4().String(),
+		Status: DISABLED,
+	}
+	return &product
 }
 
 func (p *Product) IsValid() (bool, error) {
